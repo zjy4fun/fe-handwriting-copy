@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>caller</title>
+</head>
+<body>
+<script>
+    function outer() {
+        inner()
+    }
+
+    function inner() {
+        // console.log(inner.caller)//inner 被 outer 调用
+        //降低耦合度
+        console.log(arguments.callee.caller)
+    }
+
+    outer()
+</script>
+</body>
+</html>

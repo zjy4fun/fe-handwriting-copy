@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>箭头函数中可以解决this指向问题</title>
+</head>
+<body>
+<script>
+    function King() {
+        this.royaltyName = 'Henry'
+        //this 引用 King 实例
+        setTimeout(() => console.log(this.royaltyName), 1000)
+    }
+
+    function Queen() {
+        this.royaltyName = 'Elizabeth'
+        //this 引用 window 对象
+        setTimeout(function () {
+            console.log(this.royaltyName)
+        }, 1000)
+    }
+    new King()    //Henry
+    new Queen()   //undefined
+</script>
+</body>
+</html>

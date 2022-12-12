@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>箭头函数中，this 引用的是定义箭头函数的上下文</title>
+</head>
+<body>
+<script>
+    window.color = 'red'
+    let o = {
+        color: 'blue'
+    }
+    let sayColor = () => {
+        console.log(this.color)
+    }
+    sayColor()   //red
+
+    o.sayColor = sayColor
+    o.sayColor()//red
+</script>
+</body>
+</html>

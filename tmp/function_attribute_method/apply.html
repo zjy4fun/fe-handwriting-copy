@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>apply以指定的this值来调用函数</title>
+</head>
+<body>
+<script>
+    //apply接受两个参数，函数内this的值和一个参数数组（既可以是Array的实例，也可以是arguments对象）
+    function sum(num1, num2) {
+        return num1 + num2
+    }
+
+    function callSum1(num1, num2) {
+        return sum.apply(this, arguments)//传入arguments对象
+    }
+
+    function callSum2(num1, num2) {
+        return sum.apply(this, [num1, num2])//传入数组
+    }
+
+    console.log(callSum1(10, 20))//30
+    console.log(callSum2(10, 20))//30
+</script>
+</body>
+</html>

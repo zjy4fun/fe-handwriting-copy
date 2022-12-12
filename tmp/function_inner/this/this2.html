@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>this指的是什么？</title>
+</head>
+<body>
+<script>
+    console.log(this)    //Window
+
+    function f() {
+        console.log(this)
+    }
+    f()  //此时执行环境为最外层，所以 this 指的是 Window
+
+    function f2() {
+        return function() {
+            console.log("this" + this)
+            return "hhhh"
+        }
+    }
+    console.log(f2()) //f(){...}
+
+    f2()() //执行闭包中的打印操作，此时的 this 指的是 Window
+</script>
+</body>
+</html>

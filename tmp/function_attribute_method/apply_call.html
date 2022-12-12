@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>apply, call强大的地方在于控制函数调用上下文，即函数体内this值的能力</title>
+</head>
+<body>
+<script>
+    /**
+     * 使用 call() 或 apply() 好处是可以将任意对象设置为任意函数的作用域 ==> **这样对象可以不用关心方法**
+     */
+
+    window.color = 'red'
+    let o = {
+        color: 'blue'
+    }
+
+    function sayColor() {
+        console.log(this.color)
+    }
+
+    sayColor()//red
+
+    sayColor.call(this)//red
+    sayColor.call(window)//red
+    sayColor.call(o)//blue
+    /**
+     * sayColor.call(o) 相当于下面两段代码
+     * o.sayColor = sayColor
+     * o.sayColor()
+     */
+</script>
+</body>
+</html>

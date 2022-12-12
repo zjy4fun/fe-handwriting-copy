@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>this指的是什么？</title>
+</head>
+<body>
+<script>
+  function fn1(x) {
+    return x + 1
+  }
+
+  function fn2(x) {
+    return x + 2
+  }
+
+  function fn3(x) {
+    return x + 3
+  }
+
+  function fn4(x) {
+    return x + 4
+  }
+
+  /**
+   * 普通方法
+   *
+   * @param fns
+   * @returns {function(...[*]): *}
+   */
+  function compose1(...fns) {
+    fns = fns.reverse()
+    return function (...args) {
+      let res
+      fns.forEach((fn, index) => {
+        if (index === 0) {
+          // res = fn.apply(this, args)
+          res = fn(args)
+        } else {
+          res = fn(res)
+        }
+      })
+      return res
+    }
+  }
+
+  const a = compose1(fn1, fn2, fn3)
+  console.log(a(1))
+</script>
+</body>
+</html>

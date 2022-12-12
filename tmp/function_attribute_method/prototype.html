@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>prototype是保存引用类型所有实例方法的地方</title>
+</head>
+<body>
+<script>
+    //es5中，prototype 属性不可枚举，所以使用 for-in 循环不会返回这个属性
+    console.log(Object.prototype)
+
+    //下面循环无输出
+    for (const prototypeKey in Object.prototype) {
+        console.log(prototypeKey)
+    }
+</script>
+</body>
+</html>

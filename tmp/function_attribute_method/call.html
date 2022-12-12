@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>call与apply传参形式不同，call需要将所有的参数列出来</title>
+</head>
+<body>
+<script>
+  function sum(num1, num2) {
+    return num1 + num2
+  }
+
+  function callSum(num1, num2) {
+    return sum.call(this, num1, num2)
+  }
+
+  console.log(callSum(10, 20))//30
+</script>
+</body>
+</html>
