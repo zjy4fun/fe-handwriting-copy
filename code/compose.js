@@ -30,8 +30,8 @@ function compose1(...fns) {
         let res
         fns.forEach((fn, index) => {
             if (index === 0) {
-                // res = fn.apply(this, args)
-                res = fn(args)
+                res = fn.apply(this, args)
+                // res = fn(args)
             } else {
                 res = fn(res)
             }
@@ -43,10 +43,30 @@ function compose1(...fns) {
 const a1 = compose1(fn1, fn2, fn3, fn4)
 console.log(a1(1))  // 1+4+3+2+1=11
 
+//接受参数是一个的情况，如 compose2(fns)(1)
 function compose2(...fns) {
-
-
+    return function (x) {
+        return fns.reduceRight((accumulator, currentValue) => currentValue(accumulator), x)
+    }
 }
 
-// const a2 = compose2(fn1, fn2, fn3, fn4);
-// console.log(a2(1))  // 1+4+3+2+1=11
+const a2 = compose2(fn1, fn2, fn3, fn4);
+console.log(a2(1))  // 1+4+3+2+1=11
+
+//接受参数个数不确定的情况，如 compose(fns)(1,2,3...)
+//此时需要解构出第一个函数，并传入初始参数，因为第一个函数的参数特殊
+function compose3(...fns) {
+    fns = fns.reverse()
+    return function (...args) {
+        let [...[firstFn, ...restFn]] = fns
+        if(!firstFn)return
+        if (restFn.length === 0) {
+            return firstFn.apply(this, args)
+        }else{
+            let initValue = firstFn.apply(this, args)
+            return restFn.reduceRight((accumulator, currentValue) => currentValue(accumulator), initValue)
+        }
+    }
+}
+
+console.log(fn3(fn2(fn1(1,2))) === compose3(fn3, fn2, fn1)(1,2))//true
