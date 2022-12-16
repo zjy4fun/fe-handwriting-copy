@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>使用 setTimeout 实现 setInterval</title>
+</head>
+<body>
+<script>
+    let timer = null;
+
+    function interval(fn, wait) {
+        let interfunc = function () {
+            fn.call(null);
+            timer = setTimeout(interfunc, wait);
+        }
+        timer = setTimeout(interfunc, wait);
+    }
+
+    interval(() => {
+        console.log('aa')
+    }, 1000)
+    window.clearTimeout(timer);
+</script>
+</body>
+</html>
