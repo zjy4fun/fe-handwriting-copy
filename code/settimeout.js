@@ -1,6 +1,6 @@
 /**
- * settimeout 模拟实现 setinterval(带清除定时器的版本)
- * 题目描述:setinterval 用来实现循环定时调用 可能会存在一定的问题 能用 settimeout 解决吗
+ * setTimeout 模拟实现 setInterval(带清除定时器的版本)
+ * 题目描述:setInterval 用来实现循环定时调用 可能会存在一定的问题 能用 setTimeout 解决吗
  *
  * 应用场景：
  * 在事件循环中，异步任务会进入任务队列中执行，像 setTimeout 和 setInterval 这种异步代码，会将里面的回调函数放入 WebAPI 提供的单独运行空间中，等待延迟时间以后放入任务队列
@@ -11,8 +11,10 @@ function myInterval(fn, t) {
     let timer = null
     function interval() {
         fn()
+        //递归调用 setTimeout
         timer = setTimeout(interval, t)
     }
+    // 定时器开始
     interval()
     return {
         cancel: () => {
