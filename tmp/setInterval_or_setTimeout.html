@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>setInterval 和递归 setTimeout 的区别和使用场景</title>
+</head>
+<body>
+<script src="lib/jquery-3.6.2.js"></script>
+<script>
+    // 在setInterval中使用匿名函数
+    $(function () {
+        let i = 0
+        let timer = setInterval(function () {
+            let dt = new Date()
+            let month = dt.getMonth() + 1
+            alert('现在是：' + dt.getFullYear() + '年, ' + month + '月, ' + dt.getDate() + '日')
+            i ++
+            if (i >= 3) {
+                clearInterval(timer) //在函数内部就可以使用 clearInterval 清除计时器
+            }
+        }, 500)
+    })
+</script>
+</body>
+</html>
