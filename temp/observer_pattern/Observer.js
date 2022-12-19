@@ -11,3 +11,5 @@ class Observer {
         console.log(this.name, 'got message', message)
     }
 }
+
+module.exports = Observer

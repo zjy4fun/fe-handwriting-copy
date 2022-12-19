@@ -1,5 +1,5 @@
-import Subject from './Subject'
-import Observer from './Observer'
+const Subject = require('./Subject')
+const Observer = require('./Observer')
 
 
 const subject = new Subject()

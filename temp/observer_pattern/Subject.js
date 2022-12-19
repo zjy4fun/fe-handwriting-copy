@@ -11,7 +11,9 @@ class Subject {
         this.observerList.splice(index, 1)
     }
     notifyObservers(message) {
-        const observers = this.observeList;
+        const observers = this.observerList;
         observers.forEach(observer => observer.notified(message))
     }
 }
+
+module.exports = Subject
