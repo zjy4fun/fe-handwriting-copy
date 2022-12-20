@@ -13,6 +13,7 @@ console.log(flatter([1, 2, [1, [2, 3, [4, 5, [6]]]]]))
 //2. 迭代版本
 function flatter2(arr) {
     if(!arr.length) return
+    //如果arr至少含有一个数组，那么就展开arr
     while(arr.some((item) => Array.isArray(item))){
         arr = [].concat(...arr)
     }
