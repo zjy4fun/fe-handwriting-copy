@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>throttle-debounce</title>
+</head>
+<body>
+<script>
+    //防抖: n 秒执行该事件，若在 n 秒内被重复触发，则重新计时
+    function debounce(fn, delay = 300) {
+        let timer;
+        return function () {
+            const args = arguments
+            if (timer) {
+                clearTimeout(timer)
+            }
+            timer = setTimeout(() => {
+                fn.apply(this, args)
+            }, delay)
+        }
+    }
+
+    window.addEventListener(
+        "scroll",
+        debounce(() => {
+            console.log(111)
+        }, 1000)
+    )
+    //节流：n 秒内只允许一次，若在 n 秒内重复触发，只有一次生效
+    //设置一个标志
+    function throttle(fn, delay) {
+        let flag = true
+        return () => {
+            if (!flag) return;
+            flag = false;
+            timer = setTimeout(() => {
+                fn();
+                flag = true
+            }, delay)
+        }
+    }
+    window.addEventListener(
+        "scroll",
+        throttle(() => {
+            console.log(111)
+        }, 1000)
+    )
+</script>
+</body>
+</html>
